@@ -16,7 +16,7 @@ namespace lesson1
         {
             ///////////////////////////////////////////////////////////////////////
             // variables
-            int a = 5
+            int a = 5;
             string t = "abc";
             double x = 123.456;
             bool b = true;
