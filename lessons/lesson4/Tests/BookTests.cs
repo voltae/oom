@@ -15,7 +15,7 @@ namespace Tests
             Assert.IsTrue(x.Title == "Real-Time Rendering");
             Assert.IsTrue(x.ISBN == "978-1568814247");
             Assert.IsTrue(x.Price.Amount == 78.95m);
-            Assert.IsTrue(x.Price.Unit == Currency.EUR);
+            Assert.IsTrue(x.Price.Unit == Currency.USD);
         }
 
         [Test]
