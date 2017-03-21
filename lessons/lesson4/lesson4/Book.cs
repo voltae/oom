@@ -74,6 +74,7 @@ namespace lesson4
         /// <summary>
         /// Gets a textual description of this item.
         /// </summary>
+        [JsonIgnore]
         public string Description => Title;
 
         /// <summary>
