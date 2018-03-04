@@ -6,6 +6,7 @@ namespace Sports_equipment
 
     public class SportsItem
     {
+        /* field variables with underscore prefix, to distinguish them from the properties */
         private String _description;
         private String _brand;
         private decimal _price;
@@ -19,11 +20,11 @@ namespace Sports_equipment
             {
                 /* throw verläßt sofort die Funktion und geht in die drüber liegende Funktion.
                  Wenn die Exception nicht behandelt wird, wandert diese in die nächsthöhere Instanz.*/ 
-                  /*FIXME: Insert Exception catch function in caller */
-                
+                 
                 /* mit value funktioniert die Abfrage, mit Description nicht, warum? */
                  if (value == "") throw new Exception("description must be set!"); 
-                /* assign the private field the incoming value */
+                /* assign the private field the incoming value => ("value") stand for the entry on the
+                 right side of the assignment */
                 _description = value;
             }
         }
@@ -62,20 +63,24 @@ namespace Sports_equipment
         }
         
         /* This method should be only private its only for this file, private is within the same class
-        internal Access is limited to the current assembly.*/
+        internal Access is limited to the current assembly. internal is the same as file private in swift. */
         /** brief: print out Description, Brand and Price */
        internal void printItem()
         {
             Console.WriteLine($"Item - Description: {this.Description}");
             Console.WriteLine($"Item - Brand: {this._brand}");
             Console.WriteLine($"Price Item1: € {this.Price}");
+            /* this stands for the class itself if item1.printItem() get called - this stands for item1.
+             * in case item2.printItem() this stads for item2
+             * same as self in swift */ 
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            /* referencing first the varaible */
+            /* referencing first the variable. Item2 have to be declared in first place,
+             * because it get initialized in the try block, this meens the variable is not visible outside that block */
             SportsItem item1;
             SportsItem item2;
             try
@@ -86,16 +91,20 @@ namespace Sports_equipment
             {
                 Console.WriteLine(e);
                 
-                /* initializing correctly, but first output the error message */
+                /* initializing correctly, but first output the error message
+                 *  how can be forced a reentry of ther correct value? If this part get skipped, item2 would be uninitialized*/
                  item2 = new SportsItem("Football", "Adidas", 29.95, "B787 56333");
              
             }
             item1 = new SportsItem("Touren Ski", "Hagan", 295.95, "A45 670087");
 
+            /* CallInfo the print item method, to avoid write twice the same lines of code */
             item1.printItem();
             item2.printItem();
             
             /* Change the Price of the Ski */
+            Console.WriteLine("New Price: ");
+            /* update price is a public class method to update the private _price field*/
             item1.updatePrice(195.95);
            
             item1.printItem();
