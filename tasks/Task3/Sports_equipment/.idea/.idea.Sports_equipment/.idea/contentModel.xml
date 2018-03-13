@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Box_struct.cs" t="Include" />
+      <e p="GameItem.cs" t="Include" />
+      <e p="IPrint.cs" t="Include" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="netcoreapp2.0" t="Include">
+            <e p="Sports_equipment.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Program.cs" t="Include" />
+      <e p="SportEquipment.cs" t="Include" />
+      <e p="Sports_equipment.csproj" t="IncludeRecursive" />
+      <e p="Sports_equipment.sln" t="IncludeFlat" />
+    </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2017.3/resharper-host/local/Transient/ReSharperHost/v11/SolutionCaches/_Sports_equipment.-815388713.00" t="ExcludeRecursive" />
+  </component>
+</project>
