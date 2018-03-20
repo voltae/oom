@@ -4,6 +4,8 @@ using System.Runtime.CompilerServices;
 
 namespace Sports_equipment
 {
+    
+    /* Box is a struct, value type. */
     public struct Box : IPrint
     {
         private double _length;
