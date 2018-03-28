@@ -24,14 +24,14 @@ namespace Tests
         {
             Assert.Catch(() =>
             {
-                var x = new SportsItem("Basketball", "Spalding", "1556-SPAL-89", -39.99m, Currency.USD);
+                var x = new SportsItem("Basketball", "1556-SPAL-89", "Spalding", -39.99m, Currency.USD);
             });
         }
 
         [Test]
         public void canUpdatePrice()
         {
-            var x = new SportsItem("Volleyball", "Hannahwald", "14879-Han-32", 39.99m, Currency.JPY);
+            var x = new SportsItem("Volleyball", "14879-Han-32", "Hannahwald", 39.99m, Currency.JPY);
 
             x.UpdatePrice(25.75m, Currency.JPY);
             Assert.IsTrue(x.Price.Amount == 25.75m);
@@ -86,19 +86,18 @@ namespace Tests
         [Test]
         public void canSerializeToDisk()
         {
-            var x = new SportsItem("Volleyball", "Hannahwald", "14879-Han-32", 39.99m, Currency.JPY);
-
+            var x = new SportsItem("Volleyball", "14879-Han-32", "Hannahwald", 39.99m, Currency.JPY);
             IPrint[] xColl = { x };
-
             var filename = "test.json";
             Serialize.serializeToDisk(xColl, filename);
 
-            SportsItem[] g = Serialize.deserializeSportsItemFromFilename(filename);
+            IPrint[] g = Serialize.deserializeFromFilename(filename);
+            Console.WriteLine("{0}, g");
 
-
-            Assert.IsTrue(g[0].Description == "Volleyball");
-            Assert.IsTrue(x.Price.Amount == 39.99m);
-            Assert.IsTrue(x.Price.Unit == Currency.JPY);
+            SportsItem gSpo = (SportsItem)g[0];
+            Assert.IsTrue(gSpo.Description == "Volleyball");
+            Assert.IsTrue(gSpo.Price.Amount == 39.99m);
+            Assert.IsTrue(gSpo.Price.Unit == Currency.JPY);
 
             // Delete file after use
             Serialize.deleteFile(filename);

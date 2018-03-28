@@ -12,8 +12,8 @@ namespace Sports_equipment
             IPrint gameItem1 = new GameItem("Rubiks Cube", "455-RUB-96554", "Schildkroet", 14.95m, Currency.EUR);
             IPrint gameItem2 = new GameItem("Schloss Schwaenstein Puzzle", "124-RAB-9542", "Rabensteiner", 149.95m, Currency.EUR);
             // Initializing the sportItem Objects
-            IPrint sportItem1 = new SportsItem("Touren Ski", "Hagan", "A45 670087", 295.95m, Currency.CHR);
-            IPrint sportItem2 = new SportsItem("Football", "Adidas", "B787 56333", 29.95m, Currency.USD);
+            IPrint sportItem1 = new SportsItem("Touren Ski", "A45 670087", "Hagan", 295.95m, Currency.CHR);
+            IPrint sportItem2 = new SportsItem("Football",  "B787 56333", "Adidas", 29.95m, Currency.USD);
 
             // Initialize a sportItem from type sportItem
             SportsItem sportsItem3 = new SportsItem("Langlaufski Fischer", "FSC 45998", "Fischer", 199.99m, Currency.EUR);

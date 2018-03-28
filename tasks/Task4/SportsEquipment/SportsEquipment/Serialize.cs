@@ -37,17 +37,7 @@ namespace Sports_equipment
             var filepath = Serialize.filePathToDesktopFromName(filename);
 
             var fileFromText = File.ReadAllText(filepath);
-            IPrint[] objects = JsonConvert.DeserializeObject<IPrint[]>(filepath, settings);
-
-            return objects;
-        }
-
-        static public SportsItem[] deserializeSportsItemFromFilename(string filename)
-        {
-            var filepath = Serialize.filePathToDesktopFromName(filename);
-
-            var fileFromText = File.ReadAllText(filename);
-            SportsItem[] objects = JsonConvert.DeserializeObject<SportsItem[]>(filepath, settings);
+            IPrint[] objects = JsonConvert.DeserializeObject<IPrint[]>(fileFromText, settings);
 
             return objects;
         }
