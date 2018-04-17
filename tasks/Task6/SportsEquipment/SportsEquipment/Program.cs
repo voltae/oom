@@ -1,13 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
+using System.Threading.Tasks;
+
 
 namespace Sports_equipment
 {
     class Program
     {
 
-        static void Main(string[] args)
+        static private void SerializeCollection(IPrint[] collection, string filename)
         {
+            string serialized = Serialize.serializeToDisk(collection, filename);
+
+            Console.WriteLine("{0}", serialized);
+        }
+
+        static private IPrint[] DeserializeCollection (string filename)
+        {
+            return Serialize.deserializeFromFilename(filename);
+        }
+
+        static private int CountFromToLimit (int start, int limit)
+        {
+            int i = start;
+            for (; i < limit; i++)
+            {
+                Console.WriteLine("Counter {0}", i);
+            }
+            return i;
+        }
+
+        static private int DoubleLimit(int limit)
+        {
+            return limit * 2;
+        }
+
+        static void Main()
+        {
+            
             // Initialize GameItem objects
             IPrint gameItem1 = new GameItem("Rubiks Cube", "455-RUB-96554", "Schildkroet", 14.95m, Currency.EUR);
             IPrint gameItem2 = new GameItem("Schloss Schwaenstein Puzzle", "124-RAB-9542", "Rabensteiner", 149.95m, Currency.EUR);
@@ -26,11 +61,11 @@ namespace Sports_equipment
             IPrint box2 = new Box(227, 42);
 
             // putting all objects into an array. the Iprint type takes a object of type sportsItem as well.
-            IPrint[] articelCollection =
+            IPrint[] articleCollection =
                 {sportItem1, sportItem2, sportsItem3, gameItem1, gameItem2, box1, box2, saleItem1, salesItem2};
 
             // call the printItem method from each element of the array  
-            foreach (var article in articelCollection)
+            foreach (var article in articleCollection)
             {
                 article.PrintItem();
             }
@@ -38,19 +73,48 @@ namespace Sports_equipment
             // Feed the global settings in the Serializer Method
             string filename = "assigment4.json";
 
-            string serialized = Serialize.serializeToDisk(articelCollection, filename);
+            SerializeCollection(articleCollection, filename);
 
-            Console.WriteLine("{0}", serialized);
-
-            IPrint[] deserializedObjects = Serialize.deserializeFromFilename (filename);
+            IPrint[] deserializedObjects = DeserializeCollection (filename);
             foreach (var item in deserializedObjects)
             {
                 item.PrintItem();
             }
+
+            Console.WriteLine("---- OUTPUT TASK 6.1 -----");
+
+            // Create a new variable of type Subject 
+            var sports = new Subject<IPrint>();
+
+            // Create a new subscription with a single output of each object in array 
+            var createObjects = sports.Subscribe(
+                x => x.PrintItem()
+            );
+
+           
+            // Simulate the feeding in of objects in the Subscription by iterating over the giben array
+            for (int i = 0; i < 9; i++)
+            {
+                sports.OnNext(articleCollection[i]);
+            }
+
+            // Dispose the subscription after done 
+            createObjects.Dispose();
+
+
+            Console.WriteLine("---- OUTPUT TASK 6.2 -----");
+
+            // Create a new Task to serialize the collection
+            Task saveTask = new Task(() => SerializeCollection(articleCollection, filename));
+            // start the serialization task
+            saveTask.Start();
+
+            Task counterTask = new Task(() => CountFromToLimit(0, 100));
+           
+            counterTask.Start();
+
+           // var doubleLength = await Task.WhenAll(tasks: counterTask);
         }
 
-
-       
-
-    }
+     }
 }
